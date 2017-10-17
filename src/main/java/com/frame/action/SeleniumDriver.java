@@ -25,7 +25,7 @@ public class SeleniumDriver {
 
     public static WebDriver driver;
 
-    @Parameters({"browser" })
+
     public static WebDriver openBrowser(String browser) {
         String path = System.getProperty("user.dir");
         if (browser.equals(DRIVER_CHROME)) {
@@ -39,12 +39,10 @@ public class SeleniumDriver {
         } else {
             log.error("你传入的浏览器名有误为：" + browser);
         }
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         return driver;
     }
 
-
-    //@Parameters({ "url", "browser" })
     public static WebDriver openBrowser(String url, String browser) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = null;
 //        判断要打开的浏览器
@@ -57,7 +55,7 @@ public class SeleniumDriver {
             desiredCapabilities = DesiredCapabilities.firefox();
         }
         driver = new RemoteWebDriver(new URL(url), desiredCapabilities);
-        //driver.manage().window().maximize();
+        driver.manage().window().maximize();
         return driver;
     }
 
