@@ -1,11 +1,8 @@
 package com.wd.user;
 
 import com.frame.action.Action;
-import com.frame.action.Find;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by 米阳 on 14/10/2017.

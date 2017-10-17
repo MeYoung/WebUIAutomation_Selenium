@@ -19,6 +19,13 @@ public class TestngRetry implements IRetryAnalyzer {
 		logger.info("sourceCodeEncoding=" + config.getSrouceCodeEncoding());
 	}
 
+
+	/**
+	 *  重跑机制 设置
+	 * @param result
+	 * @return
+	 */
+	@Override
 	public boolean retry(ITestResult result) {
 		if (retryCount <= maxRetryCount) {
 			String message = "Retry for [" + result.getName() + "] on class [" + result.getTestClass().getName() + "] Retry "
@@ -30,14 +37,6 @@ public class TestngRetry implements IRetryAnalyzer {
 			return true;
 		}
 		return false;
-	}
-
-	public static int getMaxRetryCount() {
-		return maxRetryCount;
-	}
-	
-	public int getRetryCount() {
-		return retryCount;
 	}
 	
 }

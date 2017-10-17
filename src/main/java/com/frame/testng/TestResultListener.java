@@ -87,9 +87,6 @@ public class TestResultListener extends TestListenerAdapter {
 				failedTestIds.add(failedTestId);
 			}
 		}
-		
-
-		
 
 		// finally delete all tests that are marked
 		for (Iterator<ITestResult> iterator = testContext.getFailedTests().getAllResults().iterator(); iterator.hasNext();) {

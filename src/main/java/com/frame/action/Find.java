@@ -26,7 +26,6 @@ public class Find extends SeleniumDriver{
             });
         } catch (Exception e) {
             log.error("元素:" + by + "查找超时");
-//            System.out.println("元素:" + by + "查找超时");
             e.printStackTrace();
         }
         return webElement;
@@ -42,7 +41,6 @@ public class Find extends SeleniumDriver{
             });
         } catch (Exception e) {
             log.error("元素:" + by + "查找超时");
-//            System.out.println("元素:" + by + "查找超时");
             e.printStackTrace();
         }
         return webElement;

@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -24,6 +25,7 @@ public class SeleniumDriver {
 
     public static WebDriver driver;
 
+    @Parameters({"browser" })
     public static WebDriver openBrowser(String browser) {
         String path = System.getProperty("user.dir");
         if (browser.equals(DRIVER_CHROME)) {
@@ -42,6 +44,7 @@ public class SeleniumDriver {
     }
 
 
+    //@Parameters({ "url", "browser" })
     public static WebDriver openBrowser(String url, String browser) throws MalformedURLException {
         DesiredCapabilities desiredCapabilities = null;
 //        判断要打开的浏览器

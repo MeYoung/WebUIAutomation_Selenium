@@ -106,6 +106,8 @@ public class ExtentTestNGIReporterListener implements IReporter {
         if(!reportDir.exists()&& !reportDir .isDirectory()){
             reportDir.mkdir();
         }
+
+        // 设置生成的html
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(OUTPUT_FOLDER + FILE_NAME);
         htmlReporter.config().setDocumentTitle(ReportUtil.getReportName());
         htmlReporter.config().setReportName(ReportUtil.getReportName());
