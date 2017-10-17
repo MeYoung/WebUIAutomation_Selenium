@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite">
+    <test name="Login">
+        <classes>
+            <!--被运行的Class 名-->
+            <class name="com.wd.user.LoginTest"/>
+        </classes>
+    </test><!-- Selenium_Demo_v3 -->
+
+
+    <listeners>
+        <listener class-name="com.frame.testng.RetryListener"/>
+        <listener class-name="com.frame.testng.TestResultListener"/>
+
+        <listener class-name="com.frame.testng.ExtentTestNGIReporterListener"/>
+    </listeners>
+</suite> <!-- Default Suite -->

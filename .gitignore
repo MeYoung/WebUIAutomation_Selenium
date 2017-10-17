@@ -1,0 +1,16 @@
+# Created by .ignore support plugin (hsz.mobi)
+
+# IntelliJ project files
+out
+gen
+target
+*log
+.idea/
+carrierData.iml
+.classpath
+.project
+.settings
+logs
+test-output
+src/test/Resources
+error
