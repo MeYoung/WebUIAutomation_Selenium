@@ -16,7 +16,7 @@ public class LoginPage {
     // 定位 密码输入框
     public static By pwdFiled = By.name("password");
     // 定位 登录按钮
-    public static By loginBtn = By.id("dologin");
+    public static By loginBtn = By.id("mm_login");
 
 
     WebDriver driver;
