@@ -16,11 +16,11 @@ public class LoginTest {
 
     WebDriver driver;
 
-    //@Parameters({"browser" })
+    @Parameters({"browser" })
     @BeforeClass
-    public void openChrome() {
+    public void openChrome(String browser) {
         SeleniumDriver seleniumDriver = new SeleniumDriver();
-        driver = seleniumDriver.openBrowser("chrome");
+        driver = seleniumDriver.openBrowser(browser);
     }
 
 
