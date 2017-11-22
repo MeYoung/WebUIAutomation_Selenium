@@ -16,10 +16,11 @@ public class LoginTest {
 
     WebDriver driver;
 
-    //@Parameters({"browser" })
+    @Parameters({"browser" })
     @BeforeClass
-    public void openChrome() {
-        driver = SeleniumDriver.openBrowser("chrome");
+    public void openChrome(String browser) {
+        SeleniumDriver seleniumDriver = new SeleniumDriver();
+        driver = seleniumDriver.openBrowser(browser);
     }
 
 
@@ -41,13 +42,13 @@ public class LoginTest {
     @Test
     public void tt() {
         driver.get("http://www.baidu.com");
-
         if(i==0){
             i++;
             Find.findElement(By.id("fasdf")).click();
         }else {
             log.info("正确");
         }
+
 
 
     }

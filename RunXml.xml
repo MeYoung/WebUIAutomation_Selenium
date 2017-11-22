@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Default Suite">
+  <test name="WebUI_Automation">
+    <classes>
+      <class name="com.wd.user.LoginTest">
+        <parameter name="browser" value="${browser}"></parameter>
+        <methods>
+          <include name="err"/>
+        </methods>
+      </class> <!-- com.wd.user.LoginTest -->
+    </classes>
+  </test> <!-- WebUI_Automation -->
+</suite> <!-- Default Suite -->

@@ -39,6 +39,7 @@
             <version>3.0.7</version>
         </dependency>
 
+
     </dependencies>
 
 
@@ -62,9 +63,8 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.20</version>
                 <configuration>
-                    <argLine>-Xmx1024m</argLine>
                     <suiteXmlFiles>
-                        <suiteXmlFile>${Run}</suiteXmlFile>
+                        <suiteXmlFile>${Run1}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
