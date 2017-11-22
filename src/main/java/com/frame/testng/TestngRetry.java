@@ -8,8 +8,8 @@ import org.testng.Reporter;
 
 public class TestngRetry implements IRetryAnalyzer {
 	private static Logger logger = Logger.getLogger(TestngRetry.class);
-	private int retryCount = 1;
-	private static int maxRetryCount;
+	public int retryCount = 1;
+	public static int maxRetryCount;
 
 	static {
 		ConfigReader config = ConfigReader.getInstance();

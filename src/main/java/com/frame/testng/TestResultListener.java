@@ -26,7 +26,7 @@ public class TestResultListener extends TestListenerAdapter {
 	public void onTestSkipped(ITestResult tr) {
 		super.onTestSkipped(tr);
 		// 自动截图
-		ScreenShot.screenShots();
+		//ScreenShot.screenShots();
 		logger.info(tr.getName() + " Skipped");
 	}
 
@@ -89,10 +89,10 @@ public class TestResultListener extends TestListenerAdapter {
 		}
 
 		// finally delete all tests that are marked
-		for (Iterator<ITestResult> iterator = testContext.getFailedTests().getAllResults().iterator(); iterator.hasNext();) {
+		for (Iterator<ITestResult> iterator = testContext.getSkippedTests().getAllResults().iterator(); iterator.hasNext();) {
 			ITestResult testResult = iterator.next();
 			if (testsToBeRemoved.contains(testResult)) {
-				logger.info("Remove repeat Fail Test: " + testResult.getName());
+				logger.info("Remove repeat Skip Test: " + testResult.getName());
 				iterator.remove();
 			}
 		}
