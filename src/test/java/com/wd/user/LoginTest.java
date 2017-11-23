@@ -30,7 +30,7 @@ public class LoginTest {
     public void testLogin2() {
         driver.get("http://mail.163.com/");
         Login loginMail = new Login(driver);
-        loginMail.login("meyoungtester", "meyoung123");
+        loginMail.login("meyoungtester", "xxxx");
     }*/
 
     @Test
