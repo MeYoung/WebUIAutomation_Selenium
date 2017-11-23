@@ -1,23 +1,21 @@
 package com.frame.testng;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.ResourceCDN;
-import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.*;
 import com.aventstack.extentreports.model.Log;
 import com.aventstack.extentreports.model.TestAttribute;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import com.frame.tools.DateFormat;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
+import com.frame.tools.MyFile;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
-
-import static com.frame.testng.TestngRetry.maxRetryCount;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class ExtentTestNGIReporterListener implements IReporter {
@@ -27,8 +25,6 @@ public class ExtentTestNGIReporterListener implements IReporter {
 
     private ExtentReports extent;
 
-    private String oldName = "";
-    private int count = 1;
 
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
@@ -94,7 +90,7 @@ public class ExtentTestNGIReporterListener implements IReporter {
                     resultNode.getModel().setDescription(String.format("Pass: %s ; Fail: %s ; Skip: %s ;", passSize, failSize, skipSize));
                 }
 
-                System.out.println("suiteFailSize:"+suiteFailSize);
+                System.out.println("suiteFailSize:" + suiteFailSize);
 
                 buildTestNodes(resultNode, context.getFailedTests(), Status.FAIL);
                 //buildTestNodes(resultNode, context.getFailedTests(), Status.FATAL);
@@ -227,6 +223,53 @@ public class ExtentTestNGIReporterListener implements IReporter {
                 }
                 test.getModel().setStartTime(getTime(result.getStartMillis()));
                 test.getModel().setEndTime(getTime(result.getEndMillis()));
+
+                //=================== 插入截图 =========================
+                // 因为我截图是失败自动截图，根据时间格式生成,所以这里插入截图的思路就是找到遍历对应文件夹下，时间在case
+                // 开始执行到结束执行之前的图片,不过这个思路感觉不太对
+
+                String startTimeStr = String.valueOf(getTime(result.getStartMillis()));
+                String endTimeStr = String.valueOf(getTime(result.getEndMillis()));
+                Matcher matcher = Pattern.compile("([0-9]\\d:[0-9]\\d:[0-9]\\d)").matcher(startTimeStr);
+                if (matcher.find()) {
+                    String timeStr1 = matcher.group();
+                    startTimeStr = timeStr1.replaceAll(":", "");
+                }
+
+                Matcher matcher1 = Pattern.compile("([0-9]\\d:[0-9]\\d:[0-9]\\d)").matcher(endTimeStr);
+                if (matcher1.find()) {
+                    String timeStr1 = matcher1.group();
+                    endTimeStr = timeStr1.replaceAll(":", "");
+                }
+
+                System.out.println("startTimeStr:" + startTimeStr + "|" + endTimeStr);
+
+                //  把失败截图加入
+                try {
+                    if (status.equals(Status.FAIL)) {
+                        String fileDir = DateFormat.format(DateFormat.CHECK_LOG_FORMAT);
+                        String path = System.getProperty("user.dir");
+                        //test.fail("图片", MediaEntityBuilder.createScreenCaptureFromPath(path + "\\error\\20171122\\20171122_144838.jpg").build());
+                        List fileNameList = MyFile.getFileName(path + "\\error\\" + fileDir);
+                        for (int i = 0; i < fileNameList.size(); i++) {
+                            String fileName = (String) fileNameList.get(i);
+                            System.out.println("fileName:" + fileName);
+                            Matcher matcher2 = Pattern.compile("(\\d{6}.jpg)").matcher(fileName);
+                            if (matcher2.find()) {
+                                String fileTime = matcher2.group().replaceAll(".jpg", "");
+                                System.out.println("fileTime" + fileTime);
+                                if (Integer.parseInt(fileTime) >= Integer.parseInt(startTimeStr) && Integer.parseInt(fileTime) <= Integer.parseInt(endTimeStr) + 2) {
+                                    test.fail("错误截图").addScreenCaptureFromPath(path + "\\error\\" + fileDir + "\\" + fileName);
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //=================== 插入截图 =========================
             }
         }
     }
@@ -236,5 +279,7 @@ public class ExtentTestNGIReporterListener implements IReporter {
         calendar.setTimeInMillis(millis);
         return calendar.getTime();
     }
+
+
 }
 

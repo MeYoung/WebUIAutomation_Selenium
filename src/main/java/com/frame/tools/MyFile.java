@@ -1,6 +1,8 @@
 package com.frame.tools;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 米阳 on 2017/10/16.
@@ -57,5 +59,28 @@ public class MyFile {
         } else if (file.isFile()) {
             file.delete();
         }
+    }
+
+
+    /**
+     * 获取某个文件夹下的所有文件名
+     *
+     * @param filePath 文件夹路径
+     * @return 文件名列表
+     */
+    public static List getFileName(String filePath) {
+        ArrayList list = new ArrayList();
+        File f = new File(filePath);
+        if (!f.exists()) {
+            System.out.println(filePath + " not exists");
+        }
+
+        File fa[] = f.listFiles();
+        for (int i = 0; i < fa.length; i++) {
+            File fs = fa[i];
+            list.add(fs.getName());
+        }
+
+        return list;
     }
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Default Suite">
-    <parameter name="browser" value="${browser}"></parameter>
+    <parameter name="browser" value="chrome"></parameter>
     <test name="WebUI_Automation">
 
         <classes>
@@ -10,6 +10,13 @@
         </classes>
     </test><!-- Selenium_Demo_v3 -->
 
+
+<!--    <test name="Login2">
+        <classes>
+            &lt;!&ndash;被运行的Class 名&ndash;&gt;
+            <class name="com.wd.user.LoginTest"/>
+        </classes>
+    </test>&lt;!&ndash; Selenium_Demo_v3 &ndash;&gt;-->
 
     <listeners>
         <listener class-name="com.frame.testng.RetryListener"/>
